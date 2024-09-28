@@ -11,8 +11,9 @@ channel = "pennti"
 class Bot(commands.Bot):
     def __init__(self):
         with open("data.json","r",encoding="utf-8") as file:
-            bad_words_data = json.load(file)
-            self.bad_words = bad_words_data["BAD_WORDS"]
+            data = json.load(file)
+            self.bad_words = data["BAD_WORDS"]
+            # self.commands = data["cmd"]
 
         super().__init__(token=Twitch_token,prefix="!",initial_channels=[channel])
         self.date_now = datetime.now().strftime("%H:%M")
@@ -50,8 +51,17 @@ class Bot(commands.Bot):
     async def colorscheme(self,ctx):
         await ctx.send("Ich benutze zurzeit oft: gruber-darker")
 
-  
+    @commands.command(name="befehle")
+    async def cmd(self,ctx):
+        wichtige_befehle = {
+            "a": "!github",
+            "b": "!editor",
+            "c": "!lurk",
+        }
 
+        await ctx.send(f"Hier sind die Wichtigsten Befehle: {wichtige_befehle['a']},  {wichtige_befehle['b']}, {wichtige_befehle['c']} {ctx.author.name}")
+                       
+                
     async def event_message(self,message):
         try:
             if message.author is not None:
