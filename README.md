@@ -16,5 +16,5 @@ TOKEN=MEIN_TOKEN
 I also created a second account for the Bot.
 
 
-Author
+# Author
 - Moritz344
